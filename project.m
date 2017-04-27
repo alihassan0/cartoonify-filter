@@ -9,9 +9,9 @@ imshow(cartoonishImg);
 %   - Rgb2Hsv
 
 % - PART 2
-%   - edgeDetector
-%   - applyMask
+%   - getEdges
+%   - maskImage
 
 % - PART 3
-%   - cleanImage
-%   - average
+%   - openImage
+%   - smoothImage
