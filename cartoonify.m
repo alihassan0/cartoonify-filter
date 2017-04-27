@@ -1,32 +1,38 @@
-img = imread('img.png');
-subplot(3,3,1), imshow(img), title('originalImg')
+function [ resultImg ] = cartoonify( imgFile )
+%CARTOONIFY: takes an image into cartoonish version
+    % read image
+    img = imread(imgFile);
 
-% trial 1 quantization
-[x, map] = rgb2ind(img, 8, 'nodither');
-subplot(3,3,2), imshow(x,map), title('8 colors quantization')
+    %---------------------- PART 1 ---------------------------------
+    % apply transformation to image in the HSV domain
+    hsvFilteredImage = hsvFilter(img);
+    
+    %---------------------- PART 3.A ---------------------------------
+    % clean rouge pixels.
+    openedImage = openImage( hsvFilteredImage );
+    
+    
+    
+    %---------------------- PART 2 ---------------------------------
+    % get image edges 
+    edges = getEdges(openedImage);
+    
+    % add edges to cleaned Image from 3.A
+    imgwithEdges = maskImage(openedImage, edges);
+    
+    %---------------------- PART 3.B ---------------------------------
+    % apply mean filter to colored image;
+    smoothedImg = smoothImage(imgwithEdges);
+    
 
-% trial 2 calcualting edges
-subplot(3,3,3), edge(rgb2gray(img)), title('edges')
+    %---------------------- Show images ---------------------------------
+    subplot(2,3,1), imshow(img), title('originalImage');
+    subplot(2,3,2), imshow(hsvFilteredImage), title('hsvtorgb');
+    subplot(2,3,3), imshow(openedImage), title('opened Image');
+    subplot(2,3,4), imshow(edges), title('3 channel edges');
+    subplot(2,3,5), imshow(imgwithEdges), title('img with edges');
+    subplot(2,3,6), imshow(smoothedImg), title('smoothed edges');
+    
+    resultImg = smoothedImg;
+end
 
-% trial 3 histograms
-h = rgb2hsv(img);
-subplot(3,3,4), imhist(img(:,:,1)) , title('red channel')
-subplot(3,3,5), imhist(img(:,:,2)), title('blue channel')
-subplot(3,3,6), imhist(img(:,:,3)), title('green channel')
-
-subplot(3,3,7), hsv , title('HSV colors');
-
-% trial 4 HSV
-hsv = rgb2hsv(img);
-
-
-
-hue = hsv(:, :, 1);
-saturation = hsv(:, :, 2);
-value = hsv(:, :, 3);
-saturation(:) = 1;
-% value(:) = 0;
-hsv = cat(3, hue, saturation, saturation);
-subplot(3,3,7), imshow(hsv2rgb(hsv)) , title('HSV colors')
-
-subplot(3,3,8), imshow(hsv2rgb(hsv)) , title('HSV colors')
