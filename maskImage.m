@@ -5,7 +5,7 @@ function [ maskedImage ] = maskImage( img, mask )
     % replace 
     mask = changem(mask,[.4],[0]);
 
-    maskedImage = cat(3, img(:,:,1).*mask, img(:,:,2).*mask, img(:,:,3).*mask); 
+    maskedImage = uint8(cat(3, img(:,:,1).*mask, img(:,:,2).*mask, img(:,:,3).*mask)); 
     
 end
 

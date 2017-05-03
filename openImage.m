@@ -6,5 +6,6 @@ function [ openedImage ] = openImage( img )
 
     % open rgb image to clear rouge pixels
     openedImage = imopen(img, structuringElement);
+    openedImage = uint8(openedImage*255);
 end
 

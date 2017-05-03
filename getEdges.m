@@ -109,7 +109,6 @@ end
 
 g=ng;
 fi{c} = g ;
-%figure, imshow(uint8(g));
 end
 
 finalimage = zeros(h,w);
@@ -121,8 +120,7 @@ for y=1:h
     end
 end
 
-finalimage = uint8(finalimage);
-figure, imshow(finalimage);
+finalimage = logical(finalimage/255);
 
 end
 

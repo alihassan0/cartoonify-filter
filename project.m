@@ -1,6 +1,6 @@
 clear ,clc
 cartoonishImg = cartoonify('testImages/test2.jpg');
-imshow(cartoonishImg);
+% imshow(cartoonishImg);
 
 % to be implmeneted functions 
 
