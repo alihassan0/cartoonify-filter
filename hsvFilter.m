@@ -63,7 +63,7 @@ function [ rgb ] = hsvFilter( img )
     hsv = cat(3, hueMat, saturationMat, valueMat);
 
     %convert HSV image to RGB 
-    rgb = Hsv2Rgb(hsv);
+    rgb = uint8(Hsv2Rgb(hsv)*255);
 
 end
 

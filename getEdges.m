@@ -8,6 +8,8 @@ img = image(:,:,c);
 f=fspecial('gaussian',17,3);
 img=imfilter(img,f,'conv');
 
+% img=mean_filter(img);
+
 gxf = [-1 0 1;-2 0 2;-1 0 1];
 gyf = [-1 -2 -1;0 0 0;1 2 1];
 

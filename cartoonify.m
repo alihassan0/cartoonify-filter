@@ -9,7 +9,7 @@ function [ resultImg ] = cartoonify( imgFile )
     
     %---------------------- PART 3.A ---------------------------------
     % clean rouge pixels.
-    openedImage = openImage( hsvFilteredImage );
+    openedImage = openImage( hsvFilteredImage, 5 );
     
     %---------------------- PART 2 ---------------------------------
     % get image edges 
@@ -32,6 +32,6 @@ function [ resultImg ] = cartoonify( imgFile )
         subplot(2,3,5), imshow(imgwithEdges), title('img with edges');
         subplot(2,3,6), imshow(smoothedImg), title('smoothed edges');
     
-    resultImg = smoothedImg;
+    resultImg = imgwithEdges;
 end
 
